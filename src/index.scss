@@ -3,13 +3,13 @@ body {
   font-family: 'Inter', system-ui;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #e7f6ff;
+  background-color: #f5f5f5;
 }
 
 *{
   font-family: 'Inter', system-ui;
-
 }
+
 .wrapper {
   background-color: #ffffff;
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.04);
@@ -74,11 +74,12 @@ header{
 .drawer{
   position: absolute;
   width: 420px;
-  height: 100%;
+  max-height: 100%; /* Замените height на max-height */
   right: 0;
   background: #ffffff;
   box-shadow: -10px 4px 24px rgba(0, 0, 0, 0.5);
   padding: 30px;
+  overflow-y: auto;
 
   h2{
     margin: 0; 
@@ -119,7 +120,7 @@ header{
 .greenButton{
   width: 100%;
     height: 55px;
-    background: #9dd558;
+    background: #FFA500;
     border-radius: 18px;
     border: 0;
     color: #fff;
@@ -130,10 +131,10 @@ header{
 
 
   &:hover{
-      background: lighten( #9dd558, 5%);
+      background: lighten( #FFA500, 5%);
     }
     &:active{
-      background: lighten( #9dd558, 5%);
+      background: lighten( #FFA500, 5%);
     }
 
 }

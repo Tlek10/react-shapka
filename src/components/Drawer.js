@@ -19,7 +19,7 @@ function Drawer({ onClose, onRemove, items = [] }) {
         <div className="overlay">
             <div className="drawer">
                 <h2 className="d-flex justify-between mb-30">
-                    Корзина
+                    Cart
                     <img
                         onClick={onClose}
                         className="cu-p"
@@ -56,18 +56,18 @@ function Drawer({ onClose, onRemove, items = [] }) {
                         <div className="cartTotalBlock">
                             <ul>
                                 <li>
-                                    <span>Итого:</span>
+                                    <span>Total:</span>
                                     <div></div>
                                     <b>{totalPrice} kzt</b>
                                 </li>
                             </ul>
-                            <button onClick={onClickOrder} className="greenButton">Оформить заказ</button>
+                            <button onClick={onClickOrder} className="greenButton">Place order</button>
                         </div>
                     </div>
                 ) : (
                     <Info
-                        title={ isOrderComplete ? "Zakaz sdelan" : "empty cart"}
-                        description={ isOrderComplete ? "zakaz peredali cure" : "add beanie"}
+                        title={isOrderComplete ? "Order Placed" : "Empty Cart"}
+                        description={isOrderComplete ? "Your order has been placed successfully" : "Add items to your cart"}
                         image={ isOrderComplete ? "/img/complete-icon.png" : "/img/empty-cart1.png"}/>
 
                 )}
