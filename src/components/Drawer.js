@@ -1,46 +1,79 @@
-function Drawer({onClose, items = []}){
-    return( 
-    <div className="overlay">
-        <div className="drawer">
-                <h2 className=" d-flex justify-between  mb-30" >Корзина                
-                    <img onClick={onClose} className="cu-p" src="/img/btn-remove.svg" alt="Remove" />
+import Info from "./Info";
+import React from "react";
+import AppContext from "../context";
+import Card from "./Card/Card";
+
+function Drawer({ onClose, onRemove, items = [] }) {
+    const {cartItems}  = React.useContext(AppContext);
+    const {setCartOpened} = React.useContext(AppContext);
+    const [isOrderComplete, setIsOrderComplete] = React.useState(false);
+    const totalPrice = cartItems.reduce((sum, obj )=>obj.price + sum,0)
+
+
+    const onClickOrder = ()=>{
+        setIsOrderComplete(true);
+        setCartOpened([]);
+    }
+
+    return (
+        <div className="overlay">
+            <div className="drawer">
+                <h2 className="d-flex justify-between mb-30">
+                    Корзина
+                    <img
+                        onClick={onClose}
+                        className="cu-p"
+                        src="/img/btn-remove.svg"
+                        alt="Remove"
+                    />
                 </h2>
 
-                <div className="items">
-                    {items.map((obj) => (
-                        <div className="cartItem d-flex align-center mb-20">
-                            <div
-                                style={{ backgroundImage: `url(${obj.imageUrl})` }}
-                                className="cartItemImg">
-                            </div>
+                {items.length > 0 ? (
+                    <div className="d-flex flex-column flex">
+                        <div className="items">
+                            {items.map((obj) => (
+                                <div key={obj.id} className="cartItem d-flex align-center mb-20" key={obj.id}>
+                                    <div
+                                        style={{ backgroundImage: `url(${obj.imageUrl})` }}
+                                        className="cartItemImg">
+                                    </div>
 
-                            <div className="mr-20 flex">
-                                <p className="mb-5">{obj.title}</p>
-                                <b>{obj.price} kzt</b>
-                            </div>
-                         <img className="removeBtn" src="/img/btn-remove.svg" alt="Remove" />
+                                    <div className="mr-20 flex">
+                                        <p className="mb-5">{obj.title}</p>
+                                        <b>{obj.price} kzt</b>
+                                    </div>
+
+                                    <img
+                                        onClick={() => onRemove(obj.id)}
+                                        className="removeBtn cu-p"
+                                        src="/img/btn-remove.svg"
+                                        alt="Remove"
+                                    />
+                                </div>
+                            ))}
                         </div>
-                    ))}
 
-                    <div className="cartTotalBlock">
-                        <ul>
-                            <li>
-                                <span>Итого:</span>
-                                <div></div>
-                                <b>11 980 kzt</b>
-                            </li>
-                            <li>
-                                <span>Доставка:</span>
-                                <div></div>
-                                <b>990 kzt</b>
-                            </li>
-                        </ul>
-                            <button className="greenButton">Оформить заказ</button>
+                        <div className="cartTotalBlock">
+                            <ul>
+                                <li>
+                                    <span>Итого:</span>
+                                    <div></div>
+                                    <b>{totalPrice} kzt</b>
+                                </li>
+                            </ul>
+                            <button onClick={onClickOrder} className="greenButton">Оформить заказ</button>
+                        </div>
                     </div>
+                ) : (
+                    <Info
+                        title={ isOrderComplete ? "Zakaz sdelan" : "empty cart"}
+                        description={ isOrderComplete ? "zakaz peredali cure" : "add beanie"}
+                        image={ isOrderComplete ? "/img/complete-icon.png" : "/img/empty-cart1.png"}/>
+
+                )}
             </div>
-        </div>    
-    </div>
-  );
+        </div>
+    );
 }
 
 export default Drawer;

@@ -40,7 +40,15 @@ header{
   border: 1px solid #f3f3f3;
   border-radius: 10px;
   padding: 0 15px;
+  position: relative;
 
+  .clear{
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    top: 13px;
+    right: 15px;
+  }
 
 
 
@@ -118,10 +126,10 @@ header{
     font-size: 16px;
     font-weight: 500;
     cursor: pointer;
-    
-    
 
-    &:hover{
+
+
+  &:hover{
       background: lighten( #9dd558, 5%);
     }
     &:active{
@@ -135,7 +143,7 @@ header{
   border: 1px solid #F3F3F3;
   border-radius: 20px;
   overflow: hidden;
-  padding: 20px;
+  padding: 20px;max-height: 300px;
 
   .cartItemImg{
     height: 70px;
